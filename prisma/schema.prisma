@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Testimony {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String
+  category  String
+  location  String
+  content   String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  excerpt   String
+  content   String
+  verse     String
+  author    String
+  createdAt DateTime @default(now())
+}
+
+model Ebook {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  description String
+  content     String
+  pages       Int
+  category    String
+  createdAt   DateTime @default(now())
+}
+
+model Mission {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  region      String
+  audience    String
+  description String
+  details     String
+  goal        String
+  createdAt   DateTime @default(now())
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Subscriber {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model BibleBook {
+  id       Int          @id @default(autoincrement())
+  abbrev   String       @unique
+  name     String
+  position Int
+  chapters Int
+  verses   BibleVerse[]
+}
+
+model BibleVerse {
+  id      Int       @id @default(autoincrement())
+  bookId  Int
+  book    BibleBook @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  chapter Int
+  verse   Int
+  text    String
+
+  @@unique([bookId, chapter, verse])
+  @@index([bookId, chapter])
+}

@@ -1,0 +1,394 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe7ff;
+  --color-brand-200: #bfd3ff;
+  --color-brand-300: #93b4ff;
+  --color-brand-400: #608bff;
+  --color-brand-500: #3b62f6;
+  --color-brand-600: #2544e8;
+  --color-brand-700: #1e35d0;
+  --color-brand-800: #1f2fa8;
+  --color-brand-900: #1f2d85;
+  --color-brand-950: #131a4d;
+
+  --color-gold-50: #fdf9ec;
+  --color-gold-100: #f9efc9;
+  --color-gold-200: #f2dc8f;
+  --color-gold-300: #eac455;
+  --color-gold-400: #e3ad2b;
+  --color-gold-500: #d4951c;
+  --color-gold-600: #b87316;
+  --color-gold-700: #925416;
+  --color-gold-800: #794318;
+  --color-gold-900: #663818;
+
+  --color-ink-950: #060a14;
+  --color-ink-900: #0b1220;
+  --color-ink-800: #111a2c;
+  --color-ink-700: #1a253b;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.9s ease-out both;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #fbfaf7;
+    color: #334155;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-200);
+    color: var(--color-ink-900);
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-400 px-6 py-3 text-sm font-semibold text-ink-900 shadow-lg shadow-gold-500/20 transition hover:-translate-y-0.5 hover:bg-gold-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500;
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/20 transition hover:-translate-y-0.5 hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/50 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-ink-900 transition hover:border-brand-300 hover:bg-brand-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10;
+  }
+
+  .label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-500;
+  }
+
+  .prose-message p {
+    @apply mb-5 leading-relaxed text-slate-600;
+  }
+
+  .prose-message p:first-letter {
+    font-size: 1.05em;
+  }
+
+  .fab {
+    @apply grid h-11 w-11 place-items-center rounded-full border border-slate-300 bg-white text-ink-900 shadow-lg shadow-slate-900/10 transition hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600;
+  }
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 78%);
+}
+
+.grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- Modo noturno ---------- */
+
+.dark {
+  color-scheme: dark;
+  background-color: #0b1220;
+}
+
+.dark body {
+  background-color: #0b1220;
+  color: #cbd5e1;
+}
+
+.dark ::selection {
+  background-color: var(--color-gold-400);
+  color: var(--color-ink-950);
+}
+
+.dark .bg-white {
+  background-color: #111a2c;
+}
+
+.dark .bg-\[\#fbfaf7\] {
+  background-color: #0b1220;
+}
+
+.dark .bg-\[\#fbfaf7\]\/85 {
+  background-color: rgba(11, 18, 32, 0.85);
+}
+
+.dark .bg-slate-50 {
+  background-color: #0f172a;
+}
+
+.dark .bg-slate-100 {
+  background-color: #162033;
+}
+
+.dark .bg-slate-200 {
+  background-color: #223049;
+}
+
+.dark .bg-brand-50 {
+  background-color: #16213f;
+}
+
+.dark .bg-brand-50\/70 {
+  background-color: rgba(22, 33, 63, 0.7);
+}
+
+.dark .bg-gold-50\/70 {
+  background-color: rgba(58, 46, 18, 0.7);
+}
+
+.dark .bg-gold-100 {
+  background-color: #3a2e12;
+}
+
+.dark .text-ink-900 {
+  color: #eef3fa;
+}
+
+.dark .text-slate-900 {
+  color: #eef3fa;
+}
+
+.dark .text-slate-800 {
+  color: #dbe4f0;
+}
+
+.dark .text-slate-700 {
+  color: #c3cfdf;
+}
+
+.dark .text-slate-600 {
+  color: #a3b0c2;
+}
+
+.dark .text-slate-500 {
+  color: #8ea0b8;
+}
+
+.dark .text-slate-400 {
+  color: #8294ad;
+}
+
+.dark .text-brand-900 {
+  color: #bfd3ff;
+}
+
+.dark .text-brand-800 {
+  color: #93b4ff;
+}
+
+.dark .text-brand-700 {
+  color: #8fb0ff;
+}
+
+.dark .text-brand-600 {
+  color: #93b4ff;
+}
+
+.dark .text-gold-700 {
+  color: #f2dc8f;
+}
+
+.dark .text-gold-600 {
+  color: #eac455;
+}
+
+.dark .border-slate-100 {
+  border-color: #1b2740;
+}
+
+.dark .border-slate-200 {
+  border-color: #223049;
+}
+
+.dark .border-slate-200\/70 {
+  border-color: rgba(34, 48, 73, 0.7);
+}
+
+.dark .border-slate-300 {
+  border-color: #2a3a57;
+}
+
+.dark .border-gold-200 {
+  border-color: #5c4a1b;
+}
+
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #1b2740;
+}
+
+.dark .ring-slate-200 {
+  --tw-ring-color: #223049;
+}
+
+.dark .ring-brand-200 {
+  --tw-ring-color: #2f4a86;
+}
+
+.dark .ring-gold-200 {
+  --tw-ring-color: #5c4a1b;
+}
+
+.dark .hover\:bg-white:hover {
+  background-color: #162033;
+}
+
+.dark .hover\:bg-slate-50:hover {
+  background-color: #162033;
+}
+
+.dark .hover\:bg-brand-50:hover {
+  background-color: #16213f;
+}
+
+.dark .hover\:text-ink-900:hover {
+  color: #ffffff;
+}
+
+.dark .hover\:text-brand-600:hover {
+  color: #93b4ff;
+}
+
+.dark .hover\:text-brand-800:hover {
+  color: #bfd3ff;
+}
+
+.dark .hover\:border-brand-200:hover {
+  border-color: #2f4a86;
+}
+
+.dark .hover\:border-brand-300:hover {
+  border-color: #3b62f6;
+}
+
+.dark .from-gold-50 {
+  --tw-gradient-from: #3a2e12;
+}
+
+.dark .via-\[\#fbfaf7\] {
+  --tw-gradient-via: #111a2c;
+}
+
+.dark .to-white {
+  --tw-gradient-to: #111a2c;
+}
+
+.dark .field {
+  background-color: #0f172a;
+  border-color: #2a3a57;
+  color: #e2e8f0;
+}
+
+.dark .field::placeholder {
+  color: #64748b;
+}
+
+.dark .label {
+  color: #94a3b8;
+}
+
+.dark .btn-ghost {
+  color: #eef3fa;
+  border-color: #2a3a57;
+}
+
+.dark .btn-ghost:hover {
+  background-color: #16213f;
+  border-color: #3b62f6;
+}
+
+.dark .btn-dark {
+  background-color: #2544e8;
+}
+
+.dark .prose-message p {
+  color: #a3b0c2;
+}
+
+.dark .fab {
+  background-color: #111a2c;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #eac455;
+}
+
+.dark .fab:hover {
+  background-color: #162033;
+  border-color: rgba(234, 196, 85, 0.6);
+  color: #f2dc8f;
+}
+
+.dark .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #334155;
+}
